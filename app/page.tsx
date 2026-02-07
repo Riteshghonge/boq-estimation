@@ -1,14 +1,27 @@
 'use client'
 
 import { useEffect } from 'react'
-import { supabase } from './lib/supabaseClient'
+import { useRouter } from 'next/navigation'
+import { useAuth } from './context/AuthContext'
 
 export default function Home() {
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      console.log('Session:', data.session)
-    })
-  }, [])
+  const { user, loading } = useAuth()
+  const router = useRouter()
 
-  return <div>Supabase connected (check console)</div>
+  useEffect(() => {
+    if (loading) return
+
+    if (!user) {
+      router.push('/login')
+      return
+    }
+
+    if (user.role === 'architect') {
+      router.push('/architect')
+    } else {
+      router.push('/vendor')
+    }
+  }, [user, loading, router])
+
+  return <div>Loading...</div>
 }
