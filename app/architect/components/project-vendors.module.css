@@ -1,0 +1,343 @@
+/* project-vendors.module.css */
+
+/* Main Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Assign Section */
+.assignSection {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.assignTitle {
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.assignForm {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.selectWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.selectIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s ease;
+  appearance: none;
+  cursor: pointer;
+}
+
+.select:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+.assignButton {
+  background-color: #2563eb;
+  color: white;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+}
+
+.assignButton:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.assignButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.assignButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.noVendorsMessage {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+/* List Section */
+.listSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.listHeader {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.vendorsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.emptyMessage {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Vendor Card */
+.vendorCard {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #f3f4f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.vendorCard:hover {
+  border-color: #bfdbfe;
+}
+
+.vendorInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vendorAvatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #f3f4f6;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #4b5563;
+  flex-shrink: 0;
+}
+
+.vendorDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.vendorName {
+  font-weight: bold;
+  color: #111827;
+  font-size: 0.9375rem;
+}
+
+.vendorId {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-family: 'Monaco', 'Courier New', monospace;
+}
+
+.vendorActions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Status Badges */
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.statusSubmitted {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #86efac;
+}
+
+.statusPending {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+/* Remove Button */
+.removeButton {
+  color: #d1d5db;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeButton:hover {
+  color: #ef4444;
+  background-color: #fee2e2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .assignForm {
+    flex-direction: column;
+  }
+
+  .assignButton {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .vendorCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .vendorActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .vendorInfo {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .assignSection {
+    padding: 1rem;
+  }
+
+  .assignTitle {
+    font-size: 0.9375rem;
+  }
+
+  .vendorAvatar {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .vendorName {
+    font-size: 0.875rem;
+  }
+
+  .vendorId {
+    font-size: 0.6875rem;
+  }
+
+  .statusBadge {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.625rem;
+  }
+
+  .vendorActions {
+    gap: 1rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .assignSection,
+  .removeButton {
+    display: none;
+  }
+
+  .vendorCard:hover {
+    border-color: #f3f4f6;
+  }
+
+  .statusSubmitted {
+    background-color: #d1fae5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .statusPending {
+    background-color: #fef3c7 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Focus States */
+.select:focus-visible,
+.assignButton:focus-visible,
+.removeButton:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.approveRevisionBtn {
+  margin-top: 4px;
+  padding: 4px 8px;
+  background-color: #fef3c7; /* Light Amber */
+  color: #92400e; /* Dark Brown/Amber */
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.approveRevisionBtn:hover {
+  background-color: #fcd34d;
+  transform: scale(1.02);
+}
+
+.approveRevisionBtn:active {
+  transform: scale(0.98);
+}

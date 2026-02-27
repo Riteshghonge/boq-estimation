@@ -2,6 +2,7 @@
 
 import { supabaseServer } from '../lib/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation' // 🟢 Added for navigation
 
 type State = {
   success: boolean
@@ -28,17 +29,22 @@ export async function createProject(
     return { success: false, error: 'Unauthorized' }
   }
 
-  const { error } = await supabase.from('projects').insert({
+  const { data, error } = await supabase.from('projects').insert({
     name,
     architect_id: user.id,
     status: 'draft',
-  })
+  }).select().single() // 🟢 Select the new project to confirm it exists
 
   if (error) {
     return { success: false, error: error.message }
   }
 
-  revalidatePath('/architect')
+  // 🟢 Force Next.js to dump the cache for the dashboard
+  revalidatePath('/architect', 'page') 
+  revalidatePath('/architect', 'layout')
+
+  // 🟢 If you want the screen to move to the new project immediately:
+  // redirect(`/architect/projects/${data.id}`)
 
   return { success: true }
 }

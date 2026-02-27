@@ -1,0 +1,245 @@
+/* ============================= */
+/* PAGE CONTAINER */
+/* ============================= */
+
+.pageContainer {
+  padding: 30px;
+  background: #f8fafc;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.pageContainer h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* ============================= */
+/* TOP USER BAR */
+/* ============================= */
+
+.topUserBar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+
+  background: #ffffff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.topUserBar > div {
+  flex: 1;
+}
+
+.topUserBar svg {
+  color: #2563eb;
+}
+
+.topUserBar small {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.topUserBar button {
+  background: #f1f5f9;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.topUserBar button:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ============================= */
+/* PROJECT GRID */
+/* ============================= */
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ============================= */
+/* PROJECT CARD */
+/* ============================= */
+
+.projectCard {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-3px);
+}
+
+/* Card Content */
+
+.projectCardContent h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.projectCardContent div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.projectCardContent span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ============================= */
+/* BADGES */
+/* ============================= */
+
+.finalizedBadge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #dc2626;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.editableBadge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #16a34a;
+  color: white;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+/* ============================= */
+/* CARD FOOTER */
+/* ============================= */
+
+.projectCardFooter {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.viewButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: #2563eb;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: 0.2s ease;
+}
+
+.viewButton:hover {
+  background: #1d4ed8;
+}
+
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: #f1f5f9;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s ease;
+}
+
+.downloadBtn:hover {
+  background: #e2e8f0;
+}
+
+/* ============================= */
+/* LOADING */
+/* ============================= */
+
+.loadingContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .pageContainer {
+    padding: 20px;
+  }
+
+  .topUserBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .projectCardFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .viewButton,
+  .downloadBtn {
+    justify-content: center;
+  }
+}

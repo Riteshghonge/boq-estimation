@@ -1,0 +1,178 @@
+.customLoadingScreen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; /* Increased to ensure it's on top of everything */
+  overflow: hidden;
+}
+
+.customLoadingScreen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.loadingContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* Construction Scene */
+.constructionScene {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 2rem;
+}
+
+/* Crane Animation */
+.crane {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  width: 80px;
+  height: 120px;
+}
+
+.craneArm {
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background: #fbbf24;
+  top: 30px;
+  transform-origin: left center;
+  animation: craneSwing 3s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes craneSwing {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.craneCable {
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: #94a3b8;
+  left: 60px;
+  top: 34px;
+  animation: cableMove 3s ease-in-out infinite;
+}
+
+@keyframes cableMove {
+  0%, 100% { height: 60px; }
+  50% { height: 40px; }
+}
+
+.craneHook {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #f59e0b;
+  border-radius: 50%;
+  left: 54px;
+  top: 94px;
+  animation: hookBounce 3s ease-in-out infinite;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes hookBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Building Blocks */
+.buildingBlocks {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.block {
+  width: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.block1 { height: 40px; animation: blockGrow 2s ease-in-out infinite; }
+.block2 { height: 60px; animation: blockGrow 2s ease-in-out 0.3s infinite; }
+.block3 { height: 80px; animation: blockGrow 2s ease-in-out 0.6s infinite; }
+
+@keyframes blockGrow {
+  0%, 100% { opacity: 0.7; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* Blueprint Grid Lines */
+.blueprintGrid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  opacity: 0.3;
+}
+
+.gridLine {
+  height: 1px;
+  background: white;
+  animation: lineGlow 2s ease-in-out infinite;
+}
+
+@keyframes lineGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* Text & Progress */
+.loadingTextContainer { color: white; }
+
+.loadingTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.progressDots {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.dot:nth-child(2) { animation-delay: 0.3s; }
+.dot:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 1; }
+}

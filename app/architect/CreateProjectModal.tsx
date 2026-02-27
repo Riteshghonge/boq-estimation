@@ -1,82 +1,121 @@
+//this file is responsible for rendering the modal that allows users to create a new project.
+//  It includes a button to trigger the modal, an input field for the project name, 
+// and buttons to cancel or confirm the creation of the project.
+//  The component also handles the logic for inserting a new project into the 
+// database using Supabase and provides feedback to the user during the creation process.  
+
+
 'use client'
+import { useState } from 'react'
+import { supabase } from '../lib/supabaseClient'
+import { Plus, X } from 'lucide-react'
+import styles from './create-project-modal.module.css'
 
-import { useState, useEffect, useActionState } from 'react'
-import { createProject } from './actions'
-
-const initialState = {
-  success: false,
-  error: undefined as string | undefined,
+interface CreateProjectModalProps {
+  onProjectCreated?: () => void;
 }
 
-export default function CreateProjectModal() {
-  const [open, setOpen] = useState(false)
+export default function CreateProjectModal({ onProjectCreated }: CreateProjectModalProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [name, setName] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const [state, formAction] = useActionState(
-    createProject,
-    initialState
-  )
+  async function handleCreate() {
+    if (!name.trim()) return
+    setLoading(true)
 
-  // ✅ Close modal on success
-  useEffect(() => {
-    if (state.success) {
-      setOpen(false)
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) throw new Error('Not authenticated')
+
+      const { error } = await supabase
+        .from('projects')
+        .insert({
+          name: name.trim(),
+          architect_id: user.id,
+          status: 'active'
+        })
+
+      if (error) throw error
+
+      setIsOpen(false)
+      setName('')
+      
+      if (onProjectCreated) {
+        onProjectCreated()
+      }
+
+    } catch (err: any) {
+      alert('Error creating project: ' + err.message)
+    } finally {
+      setLoading(false)
     }
-  }, [state.success])
+  }
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>
-        + Create Project
+      <button
+        onClick={() => setIsOpen(true)}
+        className={styles.triggerButton}
+      >
+        <Plus size={16} /> New Project
       </button>
 
-      {open && (
-        <div style={overlay}>
-          <div style={modal}>
-            <h3>Create New Project</h3>
+      {isOpen && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContainer}>
+            <div className={styles.modalHeader}>
+              <h3 className={styles.modalTitle}>Create New Project</h3>
+              <button 
+                onClick={() => setIsOpen(false)}
+                className={styles.closeButton}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className={styles.modalBody}>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>
+                  Project Name
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Skyline Apartments"
+                  className={styles.input}
+                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && name.trim()) handleCreate()
+                  }}
+                />
+              </div>
 
-            <form action={formAction}>
-              <input
-                name="name"
-                placeholder="Project name"
-                required
-              />
-
-              {state.error && (
-                <p style={{ color: 'red', marginTop: 8 }}>
-                  {state.error}
-                </p>
-              )}
-
-              <div style={{ marginTop: 12 }}>
-                <button type="submit">Create</button>
+              <div className={styles.modalFooter}>
                 <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  style={{ marginLeft: 8 }}
+                  onClick={() => setIsOpen(false)}
+                  className={styles.cancelButton}
+                  disabled={loading}
                 >
                   Cancel
                 </button>
+                <button
+                  onClick={handleCreate}
+                  disabled={loading || !name.trim()}
+                  className={styles.createButton}
+                >
+                  {loading ? (
+                    <span className={styles.loadingText}>Creating...</span>
+                  ) : (
+                    'Create Project'
+                  )}
+                </button>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       )}
     </>
   )
-}
-
-const overlay = {
-  position: 'fixed' as const,
-  inset: 0,
-  background: 'rgba(0,0,0,0.3)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}
-
-const modal = {
-  background: '#fff',
-  padding: 20,
-  borderRadius: 6,
-  width: 300,
 }
